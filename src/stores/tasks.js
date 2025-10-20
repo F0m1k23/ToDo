@@ -3,6 +3,14 @@ import { defineStore } from 'pinia'
 
 export const useTasksStore = defineStore('tasks', () => {
   const tasks = ref([])
+  const menuItems = [
+    { icon: '🏠', label: 'Дом' },
+    { icon: '🚀', label: 'Учеба' },
+    { icon: '💡', label: 'Идеи' },
+    { icon: '👤', label: 'Работа' },
+    { icon: '🎯', label: 'Цели' },
+  ]
+
   if (localStorage.getItem('tasks')) {
     try {
       tasks.value = JSON.parse(localStorage.getItem('tasks'))
@@ -17,6 +25,7 @@ export const useTasksStore = defineStore('tasks', () => {
       title: task.title,
       description: task.description,
       isDone: task.isDone,
+      topic: task.topic,
     })
   }
 
@@ -42,5 +51,5 @@ export const useTasksStore = defineStore('tasks', () => {
     },
   )
 
-  return { tasks, addTask, removeTask, taskDone, isDoneArray, allTasks }
+  return { tasks, addTask, removeTask, taskDone, isDoneArray, allTasks, menuItems }
 })

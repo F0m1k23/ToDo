@@ -1,7 +1,5 @@
 <script setup>
-import { useTasksStore } from '@/stores/tasks'
 import { TrashIcon } from '@heroicons/vue/24/solid'
-// const store = useTasksStore()
 const props = defineProps({
   task: {
     type: Object,
@@ -17,8 +15,11 @@ const props = defineProps({
       },
     ]"
   >
-    <div class="flex justify-between items-center gap-5">
-      <div>
+    <div class="flex items-center gap-5">
+      <div class="bg-red-100 p-2 rounded-full self-start">
+        {{ props.task.topic }}
+      </div>
+      <div class="flex-1">
         <h3 class="text-lg font-bold">{{ props.task.title }}</h3>
         <p>{{ props.task.description }}</p>
       </div>

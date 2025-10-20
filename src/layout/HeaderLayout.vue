@@ -12,9 +12,17 @@ const task = reactive({
   title: '',
   description: '',
   isDone: false,
+  topic: '🎯',
 })
 const addTask = (task) => {
   store.addTask(task)
+}
+const addTopic = (item) => {
+  console.log(item.icon)
+  Object.assign(task, {
+    topic: item.icon,
+  })
+  console.log(task)
 }
 </script>
 <template>
@@ -23,7 +31,8 @@ const addTask = (task) => {
       <div class="text-lg font-bold">logo</div>
       <div class="flex items-center gap-10">
         <ul class="flex gap-3">
-          <router-link to="/">Главная</router-link>
+          <router-link to="/">Все</router-link>
+          <router-link to="/notdone">Не выполненные</router-link>
           <router-link :to="{ name: 'done' }">Выполненные</router-link>
         </ul>
         <header-button @click="openModal" />
@@ -44,6 +53,21 @@ const addTask = (task) => {
       id=""
       placeholder="Введите описание"
     ></textarea>
+    <ul class="flex gap-2">
+      <li
+        @click="addTopic(item)"
+        :class="[
+          'cursor-pointer bg-amber-200 rounded-full flex justify-center items-center p-1 hover:bg-amber-600 transition duration-300',
+          {
+            'bg-amber-600 ': task.topic === item.icon,
+          },
+        ]"
+        v-for="(item, index) in store.menuItems"
+        :key="index"
+      >
+        {{ item.icon }}
+      </li>
+    </ul>
     <button
       @click="addTask(task)"
       class="cursor-pointer bg-blue-400 p-2 text-white hover:bg-blue-800 transition duration-300 rounded-lg"
