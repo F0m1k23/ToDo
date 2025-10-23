@@ -1,9 +1,9 @@
 import { ref, watch, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
-
-const toast = useToast()
 export const useTasksStore = defineStore('tasks', () => {
+  const toast = useToast()
+
   const tasks = ref([])
   const menuItems = [
     { icon: '🏠', label: 'Дом' },

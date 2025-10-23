@@ -44,6 +44,21 @@ cd toDo
 # Install dependencies
 npm install
 
-# Run the app
+# Run the app locally
 npm run dev
+```
+
+## 🚀 Deployment
+
+The app is automatically deployed to GitHub Pages on every push to the main branch.
+You can access it at: https://f0m1k23.github.io/toDo/
+
+To deploy manually:
+
+```bash
+# Build the app
+npm run build
+
+# Preview the build locally
+npm run preview
 ```

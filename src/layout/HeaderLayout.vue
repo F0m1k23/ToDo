@@ -1,6 +1,5 @@
 <script setup>
 import { ref, reactive } from 'vue'
-import HeaderButton from '@/components/HeaderButton.vue'
 import Modal from '@/components/Modal/Modal.vue'
 import { useTasksStore } from '@/stores/tasks'
 const store = useTasksStore()
@@ -49,97 +48,157 @@ const openMenu = () => {
 }
 </script>
 <template>
-  <header class="py-2 px-3 border-b border-gray-200 shadow-sm">
-    <div class="flex items-center justify-between gap-3">
-      <div class="text-lg font-bold">ToDo</div>
-      <div class="flex items-center gap-10">
-        <ul class="list flex gap-3">
-          <router-link
-            to="/"
-            active-class="border-b-3 border-blue-400"
-            class="hover:border-b-3 border-blue-400"
-            >Все</router-link
-          >
-          <router-link
-            class="hover:border-b-3 border-blue-400"
-            active-class="border-b-3 border-blue-400"
-            to="/notdone"
-            >Не выполненные</router-link
-          >
-          <router-link
-            class="hover:border-b-3 border-blue-400"
-            active-class="border-b-3 border-blue-400 "
-            :to="{ name: 'done' }"
-            >Выполненные</router-link
-          >
-        </ul>
-        <header-button @click="openModal" />
-        <button
-          @click="openMenu"
-          :class="[
-            'mobile__btn cursor-pointer',
-            {
-              active: mobileMenu,
-            },
-          ]"
-        >
-          <span class="mobile__item"></span>
-        </button>
+  <header class="py-4 px-6 bg-indigo-600 shadow-lg">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+          <span class="text-white">📝</span>
+        </div>
+        <h1 class="text-xl font-bold text-white">ToDo List</h1>
       </div>
+
+      <nav class="hidden md:flex items-center gap-6">
+        <router-link
+          to="/"
+          class="px-4 py-2 text-white/90 font-medium rounded-lg transition-colors hover:bg-white/10"
+          active-class="text-white bg-white/20"
+        >
+          📋 Все
+        </router-link>
+
+        <router-link
+          to="/notdone"
+          class="px-4 py-2 text-white/90 font-medium rounded-lg transition-colors hover:bg-white/10"
+          active-class="text-white bg-white/20"
+        >
+          ⏳ В процессе
+        </router-link>
+
+        <router-link
+          :to="{ name: 'done' }"
+          class="px-4 py-2 text-white/90 font-medium rounded-lg transition-colors hover:bg-white/10"
+          active-class="text-white bg-white/20"
+        >
+          ✅ Выполненные
+        </router-link>
+
+        <button
+          @click="openModal"
+          class="flex items-center gap-2 bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium transition-colors hover:bg-indigo-50"
+        >
+          <span>➕</span>
+          Добавить
+        </button>
+      </nav>
+
+      <button
+        @click="openMenu"
+        class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg bg-white/20 hover:bg-white/30 transition-colors"
+      >
+        <div class="flex flex-col gap-1">
+          <span class="w-6 h-0.5 bg-white rounded"></span>
+          <span class="w-6 h-0.5 bg-white rounded"></span>
+          <span class="w-6 h-0.5 bg-white rounded"></span>
+        </div>
+      </button>
     </div>
   </header>
+
   <Modal v-if="isOpen" @close-modal="isOpen = false">
-    <input
-      @input="validateTasksTitle(task.title)"
-      v-model="task.title"
-      class="border-1 py-2 px-3 rounded-lg"
-      type="text"
-      placeholder="Введите задачу"
-    />
-    <textarea
-      @input="validateTasksDescription(task.description)"
-      v-model="task.description"
-      class="border-1 py-2 px-3 rounded-lg"
-      name=""
-      id=""
-      placeholder="Введите описание"
-    ></textarea>
-    <ul class="flex gap-2">
-      <li
-        @click="addTopic(item)"
-        :class="[
-          'cursor-pointer bg-amber-200 rounded-full flex justify-center items-center p-1 hover:bg-amber-600 transition duration-300',
-          {
-            'bg-amber-600 ': task.topic === item.icon,
-          },
-        ]"
-        v-for="(item, index) in store.menuItems"
-        :key="index"
+    <div class="p-6 space-y-4">
+      <h2 class="text-xl font-bold text-gray-800 text-center">Новая задача</h2>
+
+      <div class="space-y-4">
+        <div>
+          <input
+            @input="validateTasksTitle(task.title)"
+            v-model="task.title"
+            class="w-full border border-gray-300 py-2 px-3 rounded-lg focus:border-indigo-400 focus:outline-none"
+            type="text"
+            placeholder="Название задачи"
+          />
+        </div>
+
+        <div>
+          <textarea
+            @input="validateTasksDescription(task.description)"
+            v-model="task.description"
+            class="w-full border border-gray-300 py-2 px-3 rounded-lg focus:border-indigo-400 focus:outline-none resize-none h-24"
+            placeholder="Описание задачи"
+          ></textarea>
+        </div>
+
+        <div>
+          <p class="text-sm font-medium text-gray-700 mb-2">Тема:</p>
+          <div class="flex gap-2">
+            <button
+              v-for="(item, index) in store.menuItems"
+              :key="index"
+              @click="addTopic(item)"
+              class="w-10 h-10 rounded-lg flex items-center justify-center text-lg transition-colors border"
+              :class="{
+                'border-indigo-400 bg-indigo-100': task.topic === item.icon,
+                'border-gray-200 bg-gray-100 hover:bg-gray-200': task.topic !== item.icon,
+              }"
+            >
+              {{ item.icon }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button
+        @click="addTask(task)"
+        class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg font-medium transition-colors hover:bg-indigo-700"
       >
-        {{ item.icon }}
-      </li>
-    </ul>
-    <button
-      @click="addTask(task)"
-      class="cursor-pointer bg-blue-400 p-2 text-white hover:bg-blue-800 transition duration-300 rounded-lg"
-    >
-      Добавить
-    </button>
+        Добавить задачу
+      </button>
+    </div>
   </Modal>
+
   <div
-    class="mobile__menu flex flex-col gap-3 bg-white absolute top-12 left-0 w-full p-4 border border-gray-200 rounded-lg shadow-lg z-index-10"
     v-if="mobileMenu"
+    class="md:hidden fixed inset-x-0 top-16 bg-white border-b border-gray-200 shadow-lg z-50"
   >
-    <router-link class="cursor-pointer hover:bg-gray-200 p-2" to="/" @click="openMenu"
-      >Все</router-link
-    >
-    <router-link class="cursor-pointer hover:bg-gray-200 p-2" to="/notdone" @click="openMenu"
-      >Не выполненные</router-link
-    >
-    <router-link class="cursor-pointer hover:bg-gray-200 p-2" to="/done" @click="openMenu"
-      >Выполненные</router-link
-    >
+    <div class="p-4 space-y-2">
+      <router-link
+        class="flex items-center gap-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+        to="/"
+        @click="openMenu"
+      >
+        <span class="text-lg">📋</span>
+        <span>Все задачи</span>
+      </router-link>
+
+      <router-link
+        class="flex items-center gap-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+        to="/notdone"
+        @click="openMenu"
+      >
+        <span class="text-lg">⏳</span>
+        <span>В процессе</span>
+      </router-link>
+
+      <router-link
+        class="flex items-center gap-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+        to="/done"
+        @click="openMenu"
+      >
+        <span class="text-lg">✅</span>
+        <span>Выполненные</span>
+      </router-link>
+
+      <button
+        @click="openModal"
+        class="w-full flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium transition-colors hover:bg-indigo-700 mt-2"
+      >
+        <span>➕</span>
+        Новая задача
+      </button>
+    </div>
   </div>
+
+  <div v-if="mobileMenu" @click="openMenu" class="md:hidden fixed inset-0 bg-black/30 z-40"></div>
 </template>
 <style scoped>
 .mobile__btn {
