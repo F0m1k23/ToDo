@@ -3,7 +3,7 @@ import Home from '@/views/Home.vue'
 import Done from '@/views/Done.vue'
 import NotDone from '@/views/NotDone.vue'
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',

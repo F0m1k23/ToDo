@@ -1,5 +1,7 @@
 # 📝 ToDo App
 
+[![Deploy to GitHub Pages](https://github.com/F0m1k23/toDo/actions/workflows/deploy.yml/badge.svg)](https://github.com/F0m1k23/toDo/actions/workflows/deploy.yml)
+
 A simple and responsive **ToDo List** application built with **Vue 3, Pinia, and TailwindCSS**.  
 It allows users to manage daily tasks efficiently with a clean and modern interface.
 
