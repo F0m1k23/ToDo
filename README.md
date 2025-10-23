@@ -34,7 +34,7 @@ _(Add a screenshot of your app here — for example, `![ToDo App Screenshot](./s
 
 ## ⚙️ Installation
 
-```bash
+````bash
 # Clone the repository
 git clone https://github.com/F0m1k23/toDo.git
 
@@ -44,21 +44,20 @@ cd toDo
 # Install dependencies
 npm install
 
-# Run the app locally
+### Compile and Hot-Reload for Development
+
+```sh
 npm run dev
+````
+
+### Compile and Minify for Production
+
+```sh
+npm run build
 ```
 
-## 🚀 Deployment
+### Lint with [ESLint](https://eslint.org/)
 
-The app is automatically deployed to GitHub Pages on every push to the main branch.
-You can access it at: https://f0m1k23.github.io/toDo/
-
-To deploy manually:
-
-```bash
-# Build the app
-npm run build
-
-# Preview the build locally
-npm run preview
+```sh
+npm run lint
 ```
