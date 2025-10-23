@@ -1,6 +1,8 @@
 import { ref, watch, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { useToast } from 'vue-toastification'
 
+const toast = useToast()
 export const useTasksStore = defineStore('tasks', () => {
   const tasks = ref([])
   const menuItems = [
@@ -20,6 +22,10 @@ export const useTasksStore = defineStore('tasks', () => {
     }
   }
   const addTask = (task) => {
+    if (task.title.trim() === '') {
+      toast.error('Введите задачу')
+      return
+    }
     tasks.value.push({
       id: Date.now(),
       title: task.title,
@@ -27,17 +33,34 @@ export const useTasksStore = defineStore('tasks', () => {
       isDone: task.isDone,
       topic: task.topic,
     })
+    toast.success('Задача добавлена')
   }
 
   const removeTask = (id) => {
     const taskId = tasks.value.find((item) => item.id === id)
     tasks.value = tasks.value.filter((task) => task !== taskId)
+    toast.success('Задача удалена')
   }
 
   const taskDone = (id) => {
-    const taskId = tasks.value.find((item) => item.id === id)
-    taskId.isDone = !taskId.isDone
+    const task = tasks.value.find((item) => item.id === id)
+    if (task) {
+      task.isDone = !task.isDone
+      toast.success('Статус задачи изменен')
+    }
   }
+
+  const editTask = (item) => {
+    const index = tasks.value.findIndex((task) => task.id === item.id)
+    if (index !== -1) {
+      tasks.value[index] = item
+    }
+    // if (newid !== -1) {
+    //   tasks.value[newid] = { ...tasks.value[newid], ...id }
+    //   console.log(tasks.value)
+    // }
+  }
+
   const allTasks = computed(() => tasks.value.filter((task) => !task.isDone))
   const isDoneArray = computed(() => tasks.value.filter((task) => task.isDone))
 
@@ -51,5 +74,5 @@ export const useTasksStore = defineStore('tasks', () => {
     },
   )
 
-  return { tasks, addTask, removeTask, taskDone, isDoneArray, allTasks, menuItems }
+  return { tasks, addTask, removeTask, taskDone, isDoneArray, allTasks, menuItems, editTask }
 })

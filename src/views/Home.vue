@@ -8,7 +8,7 @@ const store = useTasksStore()
     <h2 v-if="store.tasks.length > 0" class="font-bold text-xl mb-6">
       Задачи: <span class="text-red-400">{{ store.tasks.length }}</span>
     </h2>
-    <ul class="flex flex-col gap-3">
+    <ul class="flex flex-col gap-5">
       <Task
         :task="task"
         v-for="task in store.tasks"

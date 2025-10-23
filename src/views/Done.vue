@@ -8,7 +8,7 @@ const store = useTasksStore()
     <h2 class="font-bold text-xl mb-6">
       Выполненные: <span class="text-red-400">{{ store.isDoneArray.length }}</span>
     </h2>
-    <ul class="flex flex-col gap-3">
+    <ul class="flex flex-col gap-5">
       <Task
         :task="task"
         v-for="task in store.isDoneArray"

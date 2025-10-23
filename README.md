@@ -1,44 +1,49 @@
-# .
+# 📝 ToDo App
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple and responsive **ToDo List** application built with **Vue 3, Pinia, and TailwindCSS**.  
+It allows users to manage daily tasks efficiently with a clean and modern interface.
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Features
 
-## Recommended Browser Setup
+- ➕ Add new tasks
+- ✅ Mark tasks as completed
+- 🗑️ Delete tasks
+- ♻️ Reactive state management with **Pinia**
+- 💾 LocalStorage support — tasks stay saved after reload
+- 📱 Fully responsive design with **TailwindCSS**
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+---
 
-## Customize configuration
+## 🧠 Tech Stack
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- **Vue 3**
+- **Pinia**
+- **TailwindCSS**
+- **Vite**
+- **JavaScript (ES6+)**
 
-## Project Setup
+---
 
-```sh
+## 📸 Preview
+
+_(Add a screenshot of your app here — for example, `![ToDo App Screenshot](./screenshot.png)`)_
+
+---
+
+## ⚙️ Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/F0m1k23/toDo.git
+
+# Go to the project folder
+cd toDo
+
+# Install dependencies
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Run the app
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
