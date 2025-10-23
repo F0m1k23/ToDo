@@ -44,20 +44,34 @@ cd toDo
 # Install dependencies
 npm install
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Run the app locally
 npm run dev
-````
-
-### Compile and Minify for Production
-
-```sh
-npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## 🚀 Deployment
 
-```sh
+The app is automatically deployed to GitHub Pages on every push to the main branch.
+You can access it at: https://f0m1k23.github.io/toDo/
+
+To deploy manually:
+```bash
+# Build the app
+npm run build
+
+# Preview the build locally
+npm run preview
+```
+
+## 🛠 Development Commands
+
+```bash
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Lint code
 npm run lint
 ```
+````
